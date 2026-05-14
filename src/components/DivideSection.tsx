@@ -139,7 +139,7 @@ export default function DivideSection() {
                   The Language Gap
                 </p>
                 <p className="text-base font-semibold leading-snug" style={{ color: 'rgba(237,232,223,0.88)' }}>
-                  600 million people. One language barrier.
+                  4 billion people. One language barrier.
                 </p>
               </div>
             </div>
