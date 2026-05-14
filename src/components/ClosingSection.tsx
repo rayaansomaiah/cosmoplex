@@ -1,6 +1,7 @@
-import { useRef } from 'react'
+import { useRef, useState } from 'react'
 import { motion, useInView } from 'framer-motion'
 import RevealLine from './shared/RevealLine'
+import WaitlistModal from './WaitlistModal'
 
 const EASE_OUT = [0.23, 1, 0.32, 1] as const
 
@@ -67,6 +68,7 @@ function BroadcastRings({ isInView }: { isInView: boolean }) {
 export default function ClosingSection() {
   const ref = useRef<HTMLDivElement>(null)
   const isInView = useInView(ref, { once: false, margin: '-10% 0px' })
+  const [modalOpen, setModalOpen] = useState(false)
 
   return (
     <section id="contact" className="relative overflow-hidden" style={{ background: '#0B0A08' }} ref={ref}>
@@ -115,13 +117,19 @@ export default function ClosingSection() {
             animate={isInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.8, delay: 0.65, ease: EASE_OUT }}
           >
-            <CTA href="mailto:hello@cosmoplex.in">
-              Talk to the team
-            </CTA>
+            <button
+              onClick={() => setModalOpen(true)}
+              className="inline-flex items-center gap-3 bg-accent text-bg font-semibold
+                         px-8 py-4 rounded-full text-sm hover:bg-primary transition-colors duration-250"
+            >
+              Join the waitlist
+            </button>
             <Secondary href="#thesis">
               Read the thesis
             </Secondary>
           </motion.div>
+
+          {modalOpen && <WaitlistModal onClose={() => setModalOpen(false)} />}
         </div>
       </div>
 
@@ -133,8 +141,6 @@ export default function ClosingSection() {
             <span className="text-xs text-muted">The literacy layer for the next 4 billion</span>
           </div>
           <div className="flex items-center gap-8 text-xs text-muted font-mono">
-            <span>India · 2025</span>
-            <span className="text-hairline">|</span>
             <a href="mailto:hello@cosmoplex.in" className="hover:text-muted transition-colors duration-200">
               hello@cosmoplex.in
             </a>

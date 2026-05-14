@@ -86,19 +86,19 @@ export default function Hero() {
       <div className="relative z-10 flex-1 flex flex-col justify-center px-8 md:px-14 lg:px-20 pt-24 max-w-[52%]">
         <div className="space-y-2 mb-8 md:mb-10">
           <LineReveal delay={0.18}>
-            <h1 className="text-[clamp(2rem,3.8vw,4.8rem)] font-medium leading-[1.05] tracking-[-0.02em] text-primary">
-              The literacy layer
+            <h1 className="text-[clamp(1.4rem,2.8vw,3.6rem)] font-medium leading-[1.05] tracking-[-0.02em] text-primary">
+              Applied AI for the next
             </h1>
           </LineReveal>
-          <LineReveal delay={0.3}>
-            <h1 className="text-[clamp(1.2rem,2vw,2.6rem)] font-[300] leading-[1.0] tracking-[-0.01em] text-primary">
-              for the next
-            </h1>
-          </LineReveal>
-          <LineReveal delay={0.44}>
+          <LineReveal delay={0.34}>
             <h1 className="text-[clamp(4rem,9vw,10rem)] font-bold leading-[0.88] tracking-[-0.04em]">
               <span className="text-accent">4</span>
               <span className="text-primary"> billion</span>
+            </h1>
+          </LineReveal>
+          <LineReveal delay={0.48}>
+            <h1 className="text-[clamp(1.4rem,2.8vw,3.6rem)] font-medium leading-[1.05] tracking-[-0.02em] text-primary">
+              users
             </h1>
           </LineReveal>
         </div>
