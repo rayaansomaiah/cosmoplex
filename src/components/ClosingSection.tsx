@@ -138,7 +138,7 @@ export default function ClosingSection() {
         <div className="max-w-7xl mx-auto px-6 md:px-10 flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
           <div className="flex items-center gap-8">
             <span className="text-xs font-mono text-muted tracking-widest uppercase">Cosmoplex</span>
-            <span className="text-xs text-muted">The literacy layer for the next 4 billion</span>
+            <span className="text-xs text-muted">Applied AI for the next 4 billion users</span>
           </div>
         </div>
       </div>
