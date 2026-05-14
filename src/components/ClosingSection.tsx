@@ -140,11 +140,6 @@ export default function ClosingSection() {
             <span className="text-xs font-mono text-muted tracking-widest uppercase">Cosmoplex</span>
             <span className="text-xs text-muted">The literacy layer for the next 4 billion</span>
           </div>
-          <div className="flex items-center gap-8 text-xs text-muted font-mono">
-            <a href="mailto:hello@cosmoplex.in" className="hover:text-muted transition-colors duration-200">
-              hello@cosmoplex.in
-            </a>
-          </div>
         </div>
       </div>
     </section>
