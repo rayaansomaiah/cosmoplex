@@ -103,8 +103,8 @@ export default function LanguageNetworkCanvas() {
         ctx.beginPath()
         ctx.moveTo(a.sx, a.sy)
         ctx.lineTo(b.sx, b.sy)
-        ctx.strokeStyle = g(0.10 + d * 0.22)
-        ctx.lineWidth   = 0.4 + d * 0.7
+        ctx.strokeStyle = g(0.28 + d * 0.45)
+        ctx.lineWidth   = 0.6 + d * 1.2
         ctx.stroke()
       }
 
@@ -150,7 +150,7 @@ export default function LanguageNetworkCanvas() {
         }
 
         // Regular nodes
-        const baseR = p.type === 'outer' ? scale * 0.017 : scale * 0.011
+        const baseR = p.type === 'outer' ? scale * 0.026 : scale * 0.017
         const dotR  = baseR * (0.5 + p.depth * 0.8)
         const alpha = p.type === 'outer' ? 0.28 + p.depth * 0.35 : 0.18 + p.depth * 0.28
 
@@ -161,7 +161,7 @@ export default function LanguageNetworkCanvas() {
 
         // Labels (outer nodes only, depth-faded)
         if (p.type === 'outer') {
-          const fs = Math.max(7, Math.round(scale * 0.052 * (0.5 + p.depth * 0.7)))
+          const fs = Math.max(10, Math.round(scale * 0.085 * (0.5 + p.depth * 0.7)))
           ctx.font = `400 ${fs}px 'system-ui','Segoe UI','Arial Unicode MS',sans-serif`
 
           // Offset label away from screen centre
@@ -171,7 +171,7 @@ export default function LanguageNetworkCanvas() {
           const ly   = p.sy + (dy / dist) * (dotR + 5)
           ctx.textAlign    = dx > 8 ? 'left' : dx < -8 ? 'right' : 'center'
           ctx.textBaseline = dy > 8 ? 'top'  : dy < -8 ? 'bottom' : 'middle'
-          ctx.fillStyle    = gw(0.28 + p.depth * 0.32)
+          ctx.fillStyle    = gw(0.45 + p.depth * 0.45)
           ctx.fillText(p.label, lx, ly)
         }
       }
