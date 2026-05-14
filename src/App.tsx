@@ -28,6 +28,9 @@ export default function App() {
       <SectionDivider label="Questions" style={{ background: '#0B0A08' }} />
       <FaqSection />
       <ClosingSection />
+      <footer className="border-t border-hairline py-6 text-center">
+        <p className="text-xs text-faint font-mono">© 2026 Cosmoplex AI, Inc. All rights reserved.</p>
+      </footer>
     </div>
   )
 }
