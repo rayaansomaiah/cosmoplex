@@ -62,34 +62,23 @@ export default function Hero() {
         />
       </div>
 
-      {/* Globe — full bleed on mobile, right half on desktop */}
-      <div className="absolute inset-y-0 right-0 w-full md:w-[55%] z-0">
+      {/* Canvas — own visual block on mobile, absolute right panel on desktop */}
+      <div className="relative w-full h-[44vh] mt-16 md:mt-0 md:absolute md:inset-y-0 md:right-0 md:h-auto md:w-[55%] z-0">
         <LanguageNetworkCanvas />
-        {/* Fade left edge */}
-        <div
-          className="absolute inset-y-0 left-0 w-full md:w-40 pointer-events-none"
-          style={{ background: 'linear-gradient(to right, #0B0A08 40%, transparent)' }}
-        />
-        {/* Fade right edge */}
-        <div
-          className="absolute inset-y-0 right-0 w-24 pointer-events-none"
-          style={{ background: 'linear-gradient(to left, #0B0A08, transparent)' }}
-        />
+        {/* Left fade — desktop only */}
+        <div className="absolute inset-y-0 left-0 w-40 pointer-events-none hidden md:block"
+          style={{ background: 'linear-gradient(to right, #0B0A08, transparent)' }} />
+        {/* Right fade */}
+        <div className="absolute inset-y-0 right-0 w-24 pointer-events-none"
+          style={{ background: 'linear-gradient(to left, #0B0A08, transparent)' }} />
         {/* Bottom fade */}
-        <div
-          className="absolute inset-x-0 bottom-0 h-48 pointer-events-none"
-          style={{ background: 'linear-gradient(to bottom, transparent, #0B0A08)' }}
-        />
-        {/* Mobile: light overlay so canvas stays visible */}
-        <div
-          className="absolute inset-0 pointer-events-none md:hidden"
-          style={{ background: 'rgba(11,10,8,0.15)' }}
-        />
+        <div className="absolute inset-x-0 bottom-0 h-24 md:h-48 pointer-events-none"
+          style={{ background: 'linear-gradient(to bottom, transparent, #0B0A08)' }} />
       </div>
 
       {/* Text content */}
-      <div className="relative z-10 flex-1 flex flex-col justify-center px-6 md:px-14 lg:px-20 pt-28 md:pt-24 w-full md:max-w-[52%]">
-        <div className="space-y-1 mb-7 md:mb-10">
+      <div className="relative z-10 flex flex-col px-6 md:px-14 lg:px-20 pb-10 md:flex-1 md:justify-center md:pt-24 md:max-w-[52%]">
+        <div className="space-y-1 mb-6 md:mb-10">
           <LineReveal delay={0.18}>
             <h1 className="text-[clamp(1.1rem,4.5vw,3.6rem)] font-medium leading-[1.05] tracking-[-0.02em] text-primary">
               AI literacy and applied AI
@@ -114,7 +103,7 @@ export default function Hero() {
         </div>
 
         <motion.p
-          className="text-sm md:text-base leading-relaxed text-primary max-w-[38ch] mb-8 md:mb-10"
+          className="text-sm md:text-base leading-relaxed text-muted max-w-[38ch] mb-8 md:mb-10"
           initial={{ opacity: 0, y: 16 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.72, ease: EASE_OUT }}
