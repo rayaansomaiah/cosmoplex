@@ -62,15 +62,15 @@ export default function Hero() {
         />
       </div>
 
-      {/* Globe — right half */}
-      <div className="absolute inset-y-0 right-0 w-[55%] z-0">
+      {/* Globe — full bleed on mobile, right half on desktop */}
+      <div className="absolute inset-y-0 right-0 w-full md:w-[55%] z-0">
         <LanguageNetworkCanvas />
-        {/* Fade globe into background on left edge */}
+        {/* Fade left edge */}
         <div
-          className="absolute inset-y-0 left-0 w-40 pointer-events-none"
-          style={{ background: 'linear-gradient(to right, #0B0A08, transparent)' }}
+          className="absolute inset-y-0 left-0 w-full md:w-40 pointer-events-none"
+          style={{ background: 'linear-gradient(to right, #0B0A08 40%, transparent)' }}
         />
-        {/* Fade on right edge */}
+        {/* Fade right edge */}
         <div
           className="absolute inset-y-0 right-0 w-24 pointer-events-none"
           style={{ background: 'linear-gradient(to left, #0B0A08, transparent)' }}
@@ -80,36 +80,41 @@ export default function Hero() {
           className="absolute inset-x-0 bottom-0 h-48 pointer-events-none"
           style={{ background: 'linear-gradient(to bottom, transparent, #0B0A08)' }}
         />
+        {/* Mobile: heavy overlay so text stays readable */}
+        <div
+          className="absolute inset-0 pointer-events-none md:hidden"
+          style={{ background: 'rgba(11,10,8,0.55)' }}
+        />
       </div>
 
-      {/* Left — text content */}
-      <div className="relative z-10 flex-1 flex flex-col justify-center px-8 md:px-14 lg:px-20 pt-24 max-w-[52%]">
-        <div className="space-y-2 mb-8 md:mb-10">
+      {/* Text content */}
+      <div className="relative z-10 flex-1 flex flex-col justify-center px-6 md:px-14 lg:px-20 pt-28 md:pt-24 w-full md:max-w-[52%]">
+        <div className="space-y-1 mb-7 md:mb-10">
           <LineReveal delay={0.18}>
-            <h1 className="text-[clamp(1.4rem,2.8vw,3.6rem)] font-medium leading-[1.05] tracking-[-0.02em] text-primary">
+            <h1 className="text-[clamp(1.1rem,4.5vw,3.6rem)] font-medium leading-[1.05] tracking-[-0.02em] text-primary">
               AI literacy and applied AI
             </h1>
           </LineReveal>
           <LineReveal delay={0.3}>
-            <h1 className="text-[clamp(1.4rem,2.8vw,3.6rem)] font-medium leading-[1.05] tracking-[-0.02em] text-primary">
+            <h1 className="text-[clamp(1.1rem,4.5vw,3.6rem)] font-medium leading-[1.05] tracking-[-0.02em] text-primary">
               for the next
             </h1>
           </LineReveal>
           <LineReveal delay={0.44}>
-            <h1 className="text-[clamp(4rem,9vw,10rem)] font-bold leading-[0.88] tracking-[-0.04em]">
+            <h1 className="text-[clamp(3.5rem,18vw,10rem)] font-bold leading-[0.88] tracking-[-0.04em]">
               <span className="text-accent">4</span>
               <span className="text-primary"> billion</span>
             </h1>
           </LineReveal>
           <LineReveal delay={0.58}>
-            <h1 className="text-[clamp(1.4rem,2.8vw,3.6rem)] font-medium leading-[1.05] tracking-[-0.02em] text-primary">
+            <h1 className="text-[clamp(1.1rem,4.5vw,3.6rem)] font-medium leading-[1.05] tracking-[-0.02em] text-primary">
               users
             </h1>
           </LineReveal>
         </div>
 
         <motion.p
-          className="text-base leading-relaxed text-primary max-w-[40ch] mb-10"
+          className="text-sm md:text-base leading-relaxed text-primary max-w-[38ch] mb-8 md:mb-10"
           initial={{ opacity: 0, y: 16 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.72, ease: EASE_OUT }}
