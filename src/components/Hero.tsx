@@ -63,7 +63,7 @@ export default function Hero() {
       </div>
 
       {/* Canvas — own visual block on mobile, absolute right panel on desktop */}
-      <div className="relative w-full h-[44vh] mt-16 md:mt-0 md:absolute md:inset-y-0 md:right-0 md:h-auto md:w-[55%] z-0">
+      <div className="relative w-full h-[44vh] mt-24 md:mt-0 md:absolute md:inset-y-0 md:right-0 md:h-auto md:w-[55%] z-0">
         <LanguageNetworkCanvas />
         {/* Left fade — desktop only */}
         <div className="absolute inset-y-0 left-0 w-40 pointer-events-none hidden md:block"
