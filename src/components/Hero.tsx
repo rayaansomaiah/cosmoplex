@@ -80,10 +80,10 @@ export default function Hero() {
           className="absolute inset-x-0 bottom-0 h-48 pointer-events-none"
           style={{ background: 'linear-gradient(to bottom, transparent, #0B0A08)' }}
         />
-        {/* Mobile: heavy overlay so text stays readable */}
+        {/* Mobile: light overlay so canvas stays visible */}
         <div
           className="absolute inset-0 pointer-events-none md:hidden"
-          style={{ background: 'rgba(11,10,8,0.55)' }}
+          style={{ background: 'rgba(11,10,8,0.15)' }}
         />
       </div>
 

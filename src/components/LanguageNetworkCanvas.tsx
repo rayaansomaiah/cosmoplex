@@ -62,7 +62,7 @@ export default function LanguageNetworkCanvas() {
       const t = tRef.current
       ctx.clearRect(0, 0, w, h)
 
-      const scale = Math.min(w, h) * 0.28
+      const scale = Math.min(w, h) * 0.40
       const cx    = w * 0.50
       const cy    = h * 0.46
 
