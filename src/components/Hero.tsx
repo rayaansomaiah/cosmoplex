@@ -77,26 +77,26 @@ export default function Hero() {
       </div>
 
       {/* Text content */}
-      <div className="relative z-10 flex flex-col px-6 md:px-14 lg:px-20 pb-10 md:flex-1 md:justify-center md:pt-24 md:max-w-[52%]">
+      <div className="relative z-10 flex flex-col px-6 md:px-14 lg:px-20 pb-10 md:pb-0 md:flex-1 md:justify-center md:pt-24 md:max-w-[52%]">
         <div className="space-y-1 mb-6 md:mb-10">
           <LineReveal delay={0.18}>
-            <h1 className="text-[clamp(1.1rem,4.5vw,3.6rem)] font-medium leading-[1.05] tracking-[-0.02em] text-primary">
+            <h1 className="text-[clamp(1.4rem,2.8vw,3.6rem)] font-medium leading-[1.05] tracking-[-0.02em] text-primary">
               AI literacy and applied AI
             </h1>
           </LineReveal>
           <LineReveal delay={0.3}>
-            <h1 className="text-[clamp(1.1rem,4.5vw,3.6rem)] font-medium leading-[1.05] tracking-[-0.02em] text-primary">
+            <h1 className="text-[clamp(1.4rem,2.8vw,3.6rem)] font-medium leading-[1.05] tracking-[-0.02em] text-primary">
               for the next
             </h1>
           </LineReveal>
           <LineReveal delay={0.44}>
-            <h1 className="text-[clamp(3.5rem,18vw,10rem)] font-bold leading-[0.88] tracking-[-0.04em]">
+            <h1 className="text-[clamp(4rem,9vw,10rem)] font-bold leading-[0.88] tracking-[-0.04em]">
               <span className="text-accent">4</span>
               <span className="text-primary"> billion</span>
             </h1>
           </LineReveal>
           <LineReveal delay={0.58}>
-            <h1 className="text-[clamp(1.1rem,4.5vw,3.6rem)] font-medium leading-[1.05] tracking-[-0.02em] text-primary">
+            <h1 className="text-[clamp(1.4rem,2.8vw,3.6rem)] font-medium leading-[1.05] tracking-[-0.02em] text-primary">
               users
             </h1>
           </LineReveal>
