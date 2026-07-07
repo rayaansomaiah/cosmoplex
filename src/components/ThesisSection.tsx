@@ -2,14 +2,16 @@ import { useRef } from 'react'
 import { motion, useInView } from 'framer-motion'
 import RevealLine from './shared/RevealLine'
 import StarField from './shared/StarField'
+import { useLang } from '../i18n/LanguageContext'
 
 const EASE_OUT = [0.23, 1, 0.32, 1] as const
 
-const parallels = [
-  { era: 'Electricity', year: '1890s', shift: 'From candlelight factories to electrified industry' },
-  { era: 'The Internet', year: '1990s', shift: 'From physical commerce to the global web' },
-  { era: 'Mobile', year: '2000s', shift: 'From desktop access to a phone in every pocket' },
-  { era: 'Artificial Intelligence', year: 'Now', shift: 'From English-only tools to vernacular intelligence', isAccent: true },
+// Stable icon keys + accent flags; display text (era/year/shift) comes from translations
+const parallelMeta = [
+  { icon: 'Electricity' },
+  { icon: 'The Internet' },
+  { icon: 'Mobile' },
+  { icon: 'AI', isAccent: true },
 ]
 
 function EraIcon({ era, isInView, delay, accent }: {
@@ -124,6 +126,9 @@ function EraIcon({ era, isInView, delay, accent }: {
 export default function ThesisSection() {
   const containerRef = useRef<HTMLDivElement>(null)
   const isInView = useInView(containerRef, { once: true, margin: '-10% 0px' })
+  const { t, tv } = useLang()
+  const lines = tv<string[]>('thesis.lines')
+  const parallels = tv<{ era: string; year: string; shift: string }[]>('thesis.parallels')
 
   return (
     <section id="thesis" className="relative py-16 md:py-24 overflow-hidden" style={{ background: '#0B0A08' }} ref={containerRef}>
@@ -137,11 +142,11 @@ export default function ThesisSection() {
 
           <div>
             <RevealLine delay={0} className="mb-4">
-              <p className="text-sm font-mono font-semibold tracking-[0.18em] text-primary uppercase">The Context</p>
+              <p className="text-sm font-mono font-semibold tracking-[0.18em] text-primary uppercase">{t('thesis.eyebrow')}</p>
             </RevealLine>
-            {['AI is the most', 'significant economic', 'transformation of', 'our generation.'].map((line, i) => (
+            {lines.map((line, i) => (
               <RevealLine key={i} delay={0.1 + i * 0.1}>
-                <p className={`text-[clamp(2rem,4.5vw,3.8rem)] font-bold leading-[1.05] tracking-tighter text-primary${i === 3 ? ' pb-1' : ''}`}>
+                <p className={`text-[clamp(2rem,4.5vw,3.8rem)] font-bold leading-[1.05] tracking-tighter text-primary${i === lines.length - 1 ? ' pb-1' : ''}`}>
                   {line}
                 </p>
               </RevealLine>
@@ -155,28 +160,21 @@ export default function ThesisSection() {
             transition={{ duration: 0.9, delay: 0.5, ease: EASE_OUT }}
           >
             <div className="rounded-xl p-6 border border-hairline" style={{ background: '#0B0A08' }}>
-              <p className="text-base text-muted leading-relaxed">
-                Every general-purpose technology in history has gone through a moment
-                where the question shifted from "does it work?" to "who gets to use it?"
-                AI is at that moment. The capability is proven. Infrastructure is being
-                commoditised.
-              </p>
+              <p className="text-base text-muted leading-relaxed">{t('thesis.card1')}</p>
             </div>
             <div className="rounded-xl p-6 border border-hairline" style={{ background: '#0B0A08' }}>
-              <p className="text-base text-muted leading-relaxed">
-                The remaining question is not technical. It is linguistic. Cultural.
-                Human. Who gets to participate in the AI economy — and who gets left
-                structurally behind? That is the question Cosmoplex is built to answer.
-              </p>
+              <p className="text-base text-muted leading-relaxed">{t('thesis.card2')}</p>
             </div>
           </motion.div>
         </div>
 
         {/* ── HISTORICAL PARALLELS — card grid ── */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
-          {parallels.map(({ era, year, shift, isAccent }, i) => (
+          {parallels.map(({ era, year, shift }, i) => {
+            const isAccent = parallelMeta[i]?.isAccent
+            return (
             <motion.div
-              key={era}
+              key={i}
               className="rounded-2xl p-6 border flex flex-col"
               style={{
                 background: isAccent ? 'rgba(212,168,67,0.06)' : '#0B0A08',
@@ -198,7 +196,7 @@ export default function ThesisSection() {
               </div>
 
               <div className="mb-5">
-                <EraIcon era={era} isInView={isInView} delay={0.75 + i * 0.1} accent={!!isAccent} />
+                <EraIcon era={parallelMeta[i]?.icon ?? ''} isInView={isInView} delay={0.75 + i * 0.1} accent={!!isAccent} />
               </div>
 
               <p className={`text-xs font-mono tracking-[0.14em] uppercase mb-2 ${isAccent ? 'text-accent' : 'text-faint'}`}>
@@ -207,7 +205,7 @@ export default function ThesisSection() {
               <p className={`text-base font-semibold mb-3 ${isAccent ? 'text-accent' : 'text-primary'}`}>{era}</p>
               <p className="text-sm text-muted leading-relaxed mt-auto">{shift}</p>
             </motion.div>
-          ))}
+          )})}
         </div>
 
       </div>

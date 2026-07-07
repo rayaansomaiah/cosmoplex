@@ -2,41 +2,26 @@ import { useRef } from 'react'
 import { motion, useInView } from 'framer-motion'
 import { Link } from 'react-router-dom'
 import RevealLine from './shared/RevealLine'
+import { useLang } from '../i18n/LanguageContext'
 
 const EASE_OUT = [0.23, 1, 0.32, 1] as const
 
-const layers = [
-  {
-    number: '01',
-    title: 'AI Literacy',
-    subtitle: 'Vernacular AI',
-    description:
-      'Voice-first, WhatsApp-delivered AI learning built for how India actually communicates. Multi-agent pedagogy that adapts to the learner — not the other way around.',
-    tags: ['Voice-first', 'WhatsApp-delivered', 'Multi-agent', 'VALI Certification', 'Hindi + 14 Languages'],
-    output: 'Millions of AI-literate vernacular speakers.',
-    href: '/ai-literacy',
-  },
-  {
-    number: '02',
-    title: 'Applied AI Products',
-    subtitle: 'QSR & Beyond',
-    description:
-      'AI-native tools built directly for real daily workflows. QSR voice ordering and owner dashboards are the entry point. MSME, healthcare, and agriculture follow.',
-    tags: ['QSR Voice Ordering', 'Owner Dashboard', 'MSME Tools', 'Healthcare AI', 'Agriculture'],
-    output: 'Revenue-generating AI tools that serve vernacular India.',
-    href: '/applied-ai',
-  },
-  {
-    number: '03',
-    title: 'Data & Distribution',
-    subtitle: 'The Flywheel',
-    description:
-      '1M+ vernacular interactions become the product roadmap. Every lesson, query, and friction point tells us what the next 4 billion workers actually need — before we build it.',
-    tags: ['1M+ Interactions', 'Proprietary Dataset', 'Pre-validated Roadmap', 'Network Effects'],
-    output: 'Compounding distribution and data advantage.',
-    href: undefined,
-  },
+// Stable structural metadata; display text comes from translations
+const layerMeta: { number: string; href?: string }[] = [
+  { number: '01', href: '/ai-literacy' },
+  { number: '02', href: '/applied-ai' },
+  { number: '03', href: undefined },
 ]
+
+interface Layer {
+  number: string
+  href?: string
+  title: string
+  subtitle: string
+  description: string
+  tags: string[]
+  output: string
+}
 
 function LayerCardInner({ children, className = '' }: { children: React.ReactNode; className?: string }) {
   return (
@@ -46,7 +31,7 @@ function LayerCardInner({ children, className = '' }: { children: React.ReactNod
   )
 }
 
-function LayerCard({ layer, isLast }: { layer: (typeof layers)[0]; isLast: boolean }) {
+function LayerCard({ layer, isLast, layerLabel, learnMore }: { layer: Layer; isLast: boolean; layerLabel: string; learnMore: string }) {
   const ref = useRef<HTMLDivElement>(null)
   const isInView = useInView(ref, { once: true, margin: '-15% 0px' })
 
@@ -88,7 +73,7 @@ function LayerCard({ layer, isLast }: { layer: (typeof layers)[0]; isLast: boole
       <LayerCardInner className="pb-14 pt-2">
         <div className="flex items-center gap-4 mb-6">
           <span className="text-xs font-mono tracking-[0.16em] text-accent uppercase">
-            Layer {layer.number}
+            {layerLabel} {layer.number}
           </span>
           <div className="h-px flex-1 bg-hairline max-w-[80px]" />
         </div>
@@ -121,7 +106,7 @@ function LayerCard({ layer, isLast }: { layer: (typeof layers)[0]; isLast: boole
             className="group mt-7 inline-flex items-center gap-2 text-sm font-semibold px-5 py-2.5 rounded-full
                        border border-accent text-accent hover:bg-accent hover:text-bg transition-colors duration-[250ms]"
           >
-            Learn more
+            {learnMore}
             <span className="inline-block transition-transform duration-200 ease-out group-hover:translate-x-1">→</span>
           </Link>
         )}
@@ -131,6 +116,9 @@ function LayerCard({ layer, isLast }: { layer: (typeof layers)[0]; isLast: boole
 }
 
 export default function StackSection() {
+  const { t, tv } = useLang()
+  const tLayers = tv<Omit<Layer, 'number' | 'href'>[]>('stack.layers')
+  const layers: Layer[] = layerMeta.map((m, i) => ({ ...m, ...tLayers[i] }))
   return (
     <section id="the-stack" className="relative py-16 md:py-24" style={{ background: '#0B0A08' }}>
       <div
@@ -144,11 +132,11 @@ export default function StackSection() {
           {/* Left: sticky label */}
           <div className="lg:sticky lg:top-28 lg:self-start">
             <RevealLine delay={0}>
-              <p className="text-sm font-mono font-semibold tracking-[0.18em] text-primary uppercase mb-6">The Architecture</p>
+              <p className="text-sm font-mono font-semibold tracking-[0.18em] text-primary uppercase mb-6">{t('stack.eyebrow')}</p>
             </RevealLine>
             <RevealLine delay={0.1}>
               <h2 className="text-[clamp(2rem,4vw,3.2rem)] font-bold tracking-tighter text-primary leading-[1.05] mb-6">
-                The Cosmoplex Stack
+                {t('stack.headline')}
               </h2>
             </RevealLine>
             <motion.p
@@ -158,8 +146,7 @@ export default function StackSection() {
               viewport={{ once: true, margin: '-10% 0px' }}
               transition={{ duration: 0.8, delay: 0.25, ease: EASE_OUT }}
             >
-              Three mutually-reinforcing layers. Each one makes the others stronger.
-              Not a translated chatbot — an AI-native platform built from language up.
+              {t('stack.para')}
             </motion.p>
 
             <motion.div
@@ -169,11 +156,8 @@ export default function StackSection() {
               viewport={{ once: true, margin: '-10% 0px' }}
               transition={{ duration: 0.8, delay: 0.4, ease: EASE_OUT }}
             >
-              <p className="text-xs font-mono text-faint uppercase tracking-widest mb-3">The Flywheel</p>
-              <p className="text-sm text-muted leading-relaxed">
-                Layer 3 feeds Layer 1. Real data from 1M+ interactions continuously
-                improves pedagogy and pre-validates the next product before it ships.
-              </p>
+              <p className="text-xs font-mono text-faint uppercase tracking-widest mb-3">{t('stack.flywheelTitle')}</p>
+              <p className="text-sm text-muted leading-relaxed">{t('stack.flywheelBody')}</p>
               <div className="mt-5 flex items-center gap-2 text-xs text-accent font-mono">
                 <span>01</span>
                 <div className="flex-1 h-px bg-hairline" />
@@ -189,7 +173,8 @@ export default function StackSection() {
           {/* Right: layers */}
           <div>
             {layers.map((layer, i) => (
-              <LayerCard key={layer.number} layer={layer} isLast={i === layers.length - 1} />
+              <LayerCard key={layer.number} layer={layer} isLast={i === layers.length - 1}
+                layerLabel={t('stack.layerLabel')} learnMore={t('stack.learnMore')} />
             ))}
           </div>
         </div>

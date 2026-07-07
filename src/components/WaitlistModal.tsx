@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
+import { useLang } from '../i18n/LanguageContext'
 
 const EASE_OUT = [0.23, 1, 0.32, 1] as const
 const DEFAULT_ENDPOINT = 'https://formspree.io/f/xwvyjdey'
@@ -19,10 +20,11 @@ export default function WaitlistModal({
   onClose,
   endpoint = DEFAULT_ENDPOINT,
   source = 'Homepage',
-  eyebrow = 'Join the Waitlist',
-  title = 'Be first when we launch.',
-  submitLabel = 'Join the waitlist',
+  eyebrow,
+  title,
+  submitLabel,
 }: Props) {
+  const { t } = useLang()
   const [form, setForm] = useState({ name: '', email: '', phone: '', comments: '' })
   const [status, setStatus] = useState<'idle' | 'sending' | 'success' | 'error'>('idle')
 
@@ -82,35 +84,35 @@ export default function WaitlistModal({
 
           {status === 'success' ? (
             <div className="text-center py-6">
-              <p className="text-2xl font-bold text-primary mb-3">You're on the list.</p>
-              <p className="text-sm text-muted">We'll be in touch soon.</p>
+              <p className="text-2xl font-bold text-primary mb-3">{t('modal.successTitle')}</p>
+              <p className="text-sm text-muted">{t('modal.successBody')}</p>
             </div>
           ) : (
             <>
-              <p className="text-xs font-mono tracking-[0.18em] uppercase text-accent mb-2">{eyebrow}</p>
+              <p className="text-xs font-mono tracking-[0.18em] uppercase text-accent mb-2">{eyebrow ?? t('modal.eyebrow')}</p>
               <h2 className="text-xl font-bold text-primary mb-6 leading-snug">
-                {title}
+                {title ?? t('modal.title')}
               </h2>
 
               <form onSubmit={submit} className="space-y-4">
-                <input required type="text" placeholder="Full name"
+                <input required type="text" placeholder={t('modal.name')}
                   value={form.name} onChange={set('name')} className={inputCls} />
-                <input required type="email" placeholder="Email address"
+                <input required type="email" placeholder={t('modal.email')}
                   value={form.email} onChange={set('email')} className={inputCls} />
-                <input type="tel" placeholder="Phone number (optional)"
+                <input type="tel" placeholder={t('modal.phone')}
                   value={form.phone} onChange={set('phone')} className={inputCls} />
-                <textarea rows={3} placeholder="Additional comments (optional)"
+                <textarea rows={3} placeholder={t('modal.comments')}
                   value={form.comments} onChange={set('comments')}
                   className={`${inputCls} resize-none`} />
 
                 {status === 'error' && (
-                  <p className="text-xs text-red-400">Something went wrong. Please try again.</p>
+                  <p className="text-xs text-red-400">{t('modal.error')}</p>
                 )}
 
                 <button type="submit" disabled={status === 'sending'}
                   className="w-full bg-accent text-bg font-semibold py-3.5 rounded-full text-sm
                     hover:bg-primary transition-colors duration-200 disabled:opacity-50">
-                  {status === 'sending' ? 'Sending…' : submitLabel}
+                  {status === 'sending' ? t('modal.sending') : (submitLabel ?? t('modal.submit'))}
                 </button>
               </form>
             </>

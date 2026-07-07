@@ -1,25 +1,9 @@
-const items = [
-  'Vernacular AI',
-  '14 Languages',
-  '600M Speakers',
-  'VALI Certified',
-  'Voice-First',
-  'WhatsApp Delivered',
-  'Multi-Agent Pedagogy',
-  "India's AI Moment",
-  'Hindi + 13 Languages',
-  'Vernacular AI',
-  '14 Languages',
-  '600M Speakers',
-  'VALI Certified',
-  'Voice-First',
-  'WhatsApp Delivered',
-  'Multi-Agent Pedagogy',
-  "India's AI Moment",
-  'Hindi + 13 Languages',
-]
+import { useLang } from '../i18n/LanguageContext'
 
 export default function MarqueeStrip() {
+  const { tv } = useLang()
+  const base = tv<string[]>('marquee')
+  const items = [...base, ...base]
   return (
     <div
       className="border-y border-hairline overflow-hidden py-4"

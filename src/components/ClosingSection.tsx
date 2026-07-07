@@ -2,6 +2,7 @@ import { useRef, useState } from 'react'
 import { motion, useInView } from 'framer-motion'
 import RevealLine from './shared/RevealLine'
 import WaitlistModal from './WaitlistModal'
+import { useLang } from '../i18n/LanguageContext'
 
 const EASE_OUT = [0.23, 1, 0.32, 1] as const
 
@@ -69,6 +70,7 @@ export default function ClosingSection() {
   const ref = useRef<HTMLDivElement>(null)
   const isInView = useInView(ref, { once: false, margin: '-10% 0px' })
   const [modalOpen, setModalOpen] = useState(false)
+  const { t } = useLang()
 
   return (
     <section id="contact" className="relative overflow-hidden" style={{ background: '#0B0A08' }} ref={ref}>
@@ -86,14 +88,14 @@ export default function ClosingSection() {
         <div className="relative z-10 max-w-7xl mx-auto px-6 md:px-10 text-center">
           <RevealLine delay={0}>
             <p className="text-sm font-mono font-semibold tracking-[0.18em] text-primary uppercase mb-12">
-              The Thesis in One Line
+              {t('closing.eyebrow')}
             </p>
           </RevealLine>
 
           <div className="mb-4">
             <RevealLine delay={0.1}>
               <p className="text-[clamp(2rem,5vw,4.2rem)] font-bold tracking-tighter text-primary leading-[1.0]">
-                Not a translated chatbot.
+                {t('closing.l1')}
               </p>
             </RevealLine>
           </div>
@@ -101,12 +103,12 @@ export default function ClosingSection() {
           <div className="mb-16">
             <RevealLine delay={0.22}>
               <p className="text-[clamp(2rem,5vw,4.2rem)] font-bold tracking-tighter text-primary leading-[1.0]">
-                An AI-native platform
+                {t('closing.l2')}
               </p>
             </RevealLine>
             <RevealLine delay={0.34}>
               <p className="text-[clamp(2rem,5vw,4.2rem)] font-light tracking-tighter text-muted leading-[1.2] pb-1">
-                built from language up.
+                {t('closing.l3')}
               </p>
             </RevealLine>
           </div>
@@ -122,10 +124,10 @@ export default function ClosingSection() {
               className="inline-flex items-center gap-3 bg-accent text-bg font-semibold
                          px-8 py-4 rounded-full text-sm hover:bg-primary transition-colors duration-250"
             >
-              Join the waitlist
+              {t('closing.joinWaitlist')}
             </button>
             <Secondary href="#thesis">
-              Read the thesis
+              {t('closing.readThesis')}
             </Secondary>
           </motion.div>
 
@@ -138,7 +140,7 @@ export default function ClosingSection() {
         <div className="max-w-7xl mx-auto px-6 md:px-10 flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
           <div className="flex items-center gap-8">
             <span className="text-xs font-mono text-muted tracking-widest uppercase">Cosmoplex</span>
-            <span className="text-xs text-muted">AI literacy and applied AI for the next 4 billion users</span>
+            <span className="text-xs text-muted">{t('closing.footerTagline')}</span>
           </div>
         </div>
       </div>

@@ -4,27 +4,17 @@ import { Link } from 'react-router-dom'
 import StarField from '../components/shared/StarField'
 import RevealLine from '../components/shared/RevealLine'
 import WaitlistModal from '../components/WaitlistModal'
+import { useLang } from '../i18n/LanguageContext'
 
 const EASE_OUT = [0.23, 1, 0.32, 1] as const
-
-const curriculum = [
-  { k: '01', t: 'What AI actually is', d: 'Plain-language foundations — no jargon, no maths. What these tools are, and what they are not.' },
-  { k: '02', t: 'What it can do for you', d: 'Real, everyday uses — writing, translating, learning, running a small business, getting things done faster.' },
-  { k: '03', t: 'How to use it well', d: 'How to ask, how to check answers, and where the limits are — so you stay in control of the tool.' },
-  { k: '04', t: 'Using it safely', d: 'Privacy, misinformation, and scams — the judgement to use AI with confidence and care.' },
-]
-
-const delivery = [
-  { t: 'In your language', d: 'Curated and taught in local Indian languages — not translated as an afterthought.' },
-  { t: 'Voice-first', d: 'Learn by speaking and listening, on the phone you already own. No typing, no English required.' },
-  { t: 'On WhatsApp', d: 'Delivered where India already is — bite-sized, at your own pace, no app to install.' },
-  { t: 'Certification', d: 'Finish with a recognised AI-literacy certificate — proof of a skill the economy now rewards.' },
-]
 
 const LANGS = ['हिंदी', 'বাংলা', 'தமிழ்', 'తెలుగు', 'मराठी', 'ಕನ್ನಡ', 'മലയാളം', 'ਪੰਜਾਬੀ', 'ગુજરાતી', '+ more']
 
 export default function AILiteracyPage() {
   const [modalOpen, setModalOpen] = useState(false)
+  const { t, tv } = useLang()
+  const curriculum = tv<{ t: string; d: string }[]>('aiLit.curriculum')
+  const delivery = tv<{ t: string; d: string }[]>('aiLit.delivery')
 
   return (
     <section className="relative overflow-hidden" style={{ background: '#0B0A08' }}>
@@ -35,24 +25,24 @@ export default function AILiteracyPage() {
       <div className="relative z-10 max-w-5xl mx-auto px-6 md:px-10 pt-32 md:pt-40 pb-24">
 
         <Link to="/" className="inline-flex items-center gap-2 text-sm text-muted hover:text-primary transition-colors mb-14">
-          <span>←</span> Back to home
+          <span>←</span> {t('aiLit.back')}
         </Link>
 
         {/* Header */}
         <div className="mb-6">
           <RevealLine delay={0}>
             <p className="text-xs font-mono font-semibold tracking-[0.24em] text-accent uppercase mb-6">
-              Pillar 01 · AI Literacy
+              {t('aiLit.eyebrow')}
             </p>
           </RevealLine>
           <RevealLine delay={0.08}>
             <h1 className="text-[clamp(2.4rem,6vw,4.6rem)] font-bold tracking-tighter text-primary leading-[1.02]">
-              AI 101, in the
+              {t('aiLit.h1a')}
             </h1>
           </RevealLine>
           <RevealLine delay={0.16}>
             <h1 className="text-[clamp(2.4rem,6vw,4.6rem)] font-bold tracking-tighter text-accent leading-[1.02]">
-              language you think in.
+              {t('aiLit.h1b')}
             </h1>
           </RevealLine>
         </div>
@@ -62,19 +52,16 @@ export default function AILiteracyPage() {
           initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.4, ease: EASE_OUT }}
         >
-          The next four billion don't need simpler AI — they need it in their own
-          language. We're curating a foundational course that teaches what AI is
-          and how to use it, delivered in local languages for the hundreds of
-          millions who were never taught in English.
+          {t('aiLit.para')}
         </motion.p>
 
         {/* Curriculum */}
         <div className="mb-20">
-          <p className="text-sm font-mono tracking-[0.16em] text-faint uppercase mb-8">What the course covers</p>
+          <p className="text-sm font-mono tracking-[0.16em] text-faint uppercase mb-8">{t('aiLit.curriculumLabel')}</p>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             {curriculum.map((c, i) => (
               <motion.div
-                key={c.k}
+                key={i}
                 className="rounded-2xl border border-hairline p-6 md:p-7"
                 style={{ background: '#141310' }}
                 initial={{ opacity: 0, y: 20 }}
@@ -82,7 +69,7 @@ export default function AILiteracyPage() {
                 viewport={{ once: true, margin: '-10% 0px' }}
                 transition={{ duration: 0.6, delay: i * 0.08, ease: EASE_OUT }}
               >
-                <p className="text-xs font-mono text-accent mb-4">{c.k}</p>
+                <p className="text-xs font-mono text-accent mb-4">{String(i + 1).padStart(2, '0')}</p>
                 <h3 className="text-lg font-semibold text-primary mb-2">{c.t}</h3>
                 <p className="text-sm text-muted leading-relaxed">{c.d}</p>
               </motion.div>
@@ -92,11 +79,11 @@ export default function AILiteracyPage() {
 
         {/* Delivery */}
         <div className="mb-20">
-          <p className="text-sm font-mono tracking-[0.16em] text-faint uppercase mb-8">How it reaches people</p>
+          <p className="text-sm font-mono tracking-[0.16em] text-faint uppercase mb-8">{t('aiLit.deliveryLabel')}</p>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-8">
             {delivery.map((d, i) => (
               <motion.div
-                key={d.t}
+                key={i}
                 className="flex gap-4"
                 initial={{ opacity: 0, y: 16 }}
                 whileInView={{ opacity: 1, y: 0 }}
@@ -115,7 +102,7 @@ export default function AILiteracyPage() {
 
         {/* Languages */}
         <div className="mb-20">
-          <p className="text-sm font-mono tracking-[0.16em] text-faint uppercase mb-6">Launching in</p>
+          <p className="text-sm font-mono tracking-[0.16em] text-faint uppercase mb-6">{t('aiLit.launchingIn')}</p>
           <div className="flex flex-wrap gap-3">
             {LANGS.map((l, i) => (
               <motion.span
@@ -136,16 +123,16 @@ export default function AILiteracyPage() {
         <div className="rounded-2xl border border-hairline p-8 md:p-12 text-center"
           style={{ background: 'radial-gradient(ellipse 80% 100% at 50% 0%, rgba(212,168,67,0.07) 0%, transparent 70%), #0B0A08' }}>
           <h2 className="text-2xl md:text-3xl font-bold text-primary tracking-tight mb-3">
-            Be first to learn.
+            {t('aiLit.ctaTitle')}
           </h2>
           <p className="text-base text-muted mb-8 max-w-[44ch] mx-auto">
-            The AI 101 course is being curated now. Join the waitlist to get early access in your language.
+            {t('aiLit.ctaBody')}
           </p>
           <button
             onClick={() => setModalOpen(true)}
             className="inline-flex items-center gap-3 bg-accent text-bg font-semibold px-8 py-4 rounded-full text-sm hover:bg-primary transition-colors duration-250"
           >
-            Join the waitlist
+            {t('aiLit.ctaBtn')}
           </button>
         </div>
       </div>
@@ -154,9 +141,9 @@ export default function AILiteracyPage() {
         <WaitlistModal
           onClose={() => setModalOpen(false)}
           source="AI Literacy"
-          eyebrow="AI 101 Waitlist"
-          title="Be first to learn."
-          submitLabel="Join the waitlist"
+          eyebrow={t('aiLit.modalEyebrow')}
+          title={t('aiLit.modalTitle')}
+          submitLabel={t('aiLit.ctaBtn')}
         />
       )}
     </section>

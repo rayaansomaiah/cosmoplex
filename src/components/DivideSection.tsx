@@ -1,6 +1,7 @@
 import { useRef } from 'react'
 import { motion, useInView } from 'framer-motion'
 import RevealLine from './shared/RevealLine'
+import { useLang } from '../i18n/LanguageContext'
 
 const EASE_OUT = [0.23, 1, 0.32, 1] as const
 
@@ -8,6 +9,7 @@ const EASE_OUT = [0.23, 1, 0.32, 1] as const
 export default function DivideSection() {
   const ref = useRef<HTMLDivElement>(null)
   const isInView = useInView(ref, { once: true, margin: '-10% 0px' })
+  const { t } = useLang()
 
   return (
     <section id="the-divide" ref={ref} className="overflow-hidden" style={{ background: '#0B0A08' }}>
@@ -35,7 +37,7 @@ export default function DivideSection() {
             >
               <div className="w-5 h-px" style={{ background: '#D4A843' }} />
               <span className="text-[10px] font-mono tracking-[0.3em] uppercase" style={{ color: '#D4A843' }}>
-                The Divide
+                {t('divide.eyebrow')}
               </span>
             </motion.div>
 
@@ -48,7 +50,7 @@ export default function DivideSection() {
                 animate={isInView ? { y: 0 } : {}}
                 transition={{ duration: 0.9, delay: 0.1, ease: EASE_OUT }}
               >
-                4 Billion
+                {t('divide.bignum')}
               </motion.p>
             </div>
 
@@ -57,7 +59,7 @@ export default function DivideSection() {
                 className="text-[clamp(1.2rem,2.2vw,2rem)] font-semibold leading-tight tracking-tight mb-1"
                 style={{ color: '#EDE8DF' }}
               >
-                people shut out of AI.
+                {t('divide.l1')}
               </p>
             </RevealLine>
             <RevealLine delay={0.34}>
@@ -65,7 +67,7 @@ export default function DivideSection() {
                 className="text-[clamp(1rem,1.8vw,1.65rem)] font-light leading-tight tracking-tight"
                 style={{ color: 'rgba(237,232,223,0.38)' }}
               >
-                Not by choice — by language.
+                {t('divide.l2')}
               </p>
             </RevealLine>
 
@@ -92,12 +94,10 @@ export default function DivideSection() {
                 className="text-sm leading-relaxed mb-3 max-w-[40ch]"
                 style={{ color: 'rgba(237,232,223,0.48)' }}
               >
-                "AI is not creating a technology divide. It is creating a language
-                divide. The workers with the most to gain are the ones structurally
-                excluded from it."
+                {t('divide.quote')}
               </p>
               <cite className="text-[9px] font-mono tracking-[0.22em] uppercase not-italic" style={{ color: 'rgba(212,168,67,0.5)' }}>
-                Stanford AI Index 2026
+                {t('divide.cite')}
               </cite>
             </motion.blockquote>
 
@@ -136,10 +136,10 @@ export default function DivideSection() {
               {/* Bottom caption */}
               <div className="absolute bottom-5 left-5 right-5 z-20">
                 <p className="text-[9px] font-mono tracking-[0.2em] uppercase mb-1.5" style={{ color: 'rgba(212,168,67,0.6)' }}>
-                  The Language Gap
+                  {t('divide.captionEyebrow')}
                 </p>
                 <p className="text-base font-semibold leading-snug" style={{ color: 'rgba(237,232,223,0.88)' }}>
-                  4 billion people. One language barrier.
+                  {t('divide.caption')}
                 </p>
               </div>
             </div>

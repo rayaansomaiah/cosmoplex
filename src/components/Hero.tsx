@@ -1,8 +1,8 @@
-import { useRef } from 'react'
 import { motion } from 'framer-motion'
 import LanguageNetworkCanvas from './LanguageNetworkCanvas'
 import StarField from './shared/StarField'
 import AnimatedNumber from './shared/AnimatedNumber'
+import { useLang } from '../i18n/LanguageContext'
 
 const EASE_OUT = [0.23, 1, 0.32, 1] as const
 
@@ -22,7 +22,7 @@ function LineReveal({ children, delay = 0, className = '' }: {
   )
 }
 
-function CTAButton() {
+function CTAButton({ label }: { label: string }) {
   return (
     <motion.a
       href="#thesis"
@@ -31,19 +31,21 @@ function CTAButton() {
                  border border-accent text-accent group hover:bg-accent hover:text-bg
                  transition-colors duration-[250ms]"
     >
-      Explore the thesis
+      {label}
       <span className="inline-block transition-transform duration-200 ease-out group-hover:translate-x-1">→</span>
     </motion.a>
   )
 }
 
-const stats = [
-  { value: 1.2, suffix: 'B', decimals: 1, label: 'People who have ever used an AI tool', source: 'Microsoft AI Diffusion 2025' },
-  { value: 4.3, suffix: 'B', decimals: 1, label: 'Internet users who have never accessed AI', source: 'Microsoft AI Diffusion 2025' },
-  { value: 600, suffix: 'M+', decimals: 0, label: 'Vernacular speakers in India alone', source: 'Our target market' },
+const statNums = [
+  { value: 1.2, suffix: 'B', decimals: 1 },
+  { value: 4.3, suffix: 'B', decimals: 1 },
+  { value: 600, suffix: 'M+', decimals: 0 },
 ]
 
 export default function Hero() {
+  const { t, tv } = useLang()
+  const statLabels = tv<{ label: string; source: string }[]>('hero.stats')
   return (
     <section id="hero" className="relative min-h-[100dvh] flex flex-col overflow-hidden">
 
@@ -81,23 +83,23 @@ export default function Hero() {
         <div className="space-y-1 mb-6 md:mb-10">
           <LineReveal delay={0.18}>
             <h1 className="text-[clamp(1.4rem,2.8vw,3.6rem)] font-medium leading-[1.05] tracking-[-0.02em] text-primary">
-              AI literacy and applied AI
+              {t('hero.line1')}
             </h1>
           </LineReveal>
           <LineReveal delay={0.3}>
             <h1 className="text-[clamp(1.4rem,2.8vw,3.6rem)] font-medium leading-[1.05] tracking-[-0.02em] text-primary">
-              for the next
+              {t('hero.line2')}
             </h1>
           </LineReveal>
           <LineReveal delay={0.44}>
             <h1 className="text-[clamp(4rem,9vw,10rem)] font-bold leading-[0.88] tracking-[-0.04em]">
               <span className="text-accent">4</span>
-              <span className="text-primary"> billion</span>
+              <span className="text-primary"> {t('hero.billion')}</span>
             </h1>
           </LineReveal>
           <LineReveal delay={0.58}>
             <h1 className="text-[clamp(1.4rem,2.8vw,3.6rem)] font-medium leading-[1.05] tracking-[-0.02em] text-primary">
-              users
+              {t('hero.line4')}
             </h1>
           </LineReveal>
         </div>
@@ -108,9 +110,7 @@ export default function Hero() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.72, ease: EASE_OUT }}
         >
-          Building the AI literacy infrastructure for India's 600 million
-          vernacular speakers. Certification as the business model.
-          Language as the moat.
+          {t('hero.para')}
         </motion.p>
 
         <motion.div
@@ -118,7 +118,7 @@ export default function Hero() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.9, ease: EASE_OUT }}
         >
-          <CTAButton />
+          <CTAButton label={t('hero.cta')} />
         </motion.div>
       </div>
 
@@ -130,13 +130,13 @@ export default function Hero() {
         transition={{ duration: 0.8, delay: 1.1, ease: EASE_OUT }}
       >
         <div className="grid grid-cols-1 md:grid-cols-3 divide-y md:divide-y-0 md:divide-x divide-hairline">
-          {stats.map(({ value, suffix, decimals, label, source }) => (
-            <div key={label} className="py-7 md:px-10 first:pl-0 last:pr-0">
+          {statNums.map(({ value, suffix, decimals }, i) => (
+            <div key={i} className="py-7 md:px-10 first:pl-0 last:pr-0">
               <div className="font-mono text-[2rem] font-semibold text-primary tracking-tight leading-none mb-2">
                 <AnimatedNumber value={value} suffix={suffix} decimals={decimals} duration={2000} />
               </div>
-              <p className="text-sm text-muted leading-snug max-w-[28ch]">{label}</p>
-              <p className="text-[11px] text-muted mt-1 font-mono">{source}</p>
+              <p className="text-sm text-muted leading-snug max-w-[28ch]">{statLabels[i]?.label}</p>
+              <p className="text-[11px] text-muted mt-1 font-mono">{statLabels[i]?.source}</p>
             </div>
           ))}
         </div>

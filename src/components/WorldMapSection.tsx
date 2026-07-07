@@ -2,6 +2,7 @@ import { useRef } from 'react'
 import { motion, useInView } from 'framer-motion'
 import DottedMap from 'dotted-map'
 import RevealLine from './shared/RevealLine'
+import { useLang } from '../i18n/LanguageContext'
 
 const EASE_OUT = [0.23, 1, 0.32, 1] as const
 
@@ -107,6 +108,8 @@ function PulsingDot({ x, y, delay }: { x: number; y: number; delay: number }) {
 export default function WorldMapSection() {
   const ref = useRef<HTMLDivElement>(null)
   const isInView = useInView(ref, { once: true, margin: '-10% 0px' })
+  const { t, tv } = useLang()
+  const wstats = tv<{ stat: string; label: string }[]>('world.stats')
 
   return (
     <section className="relative py-14 md:py-20 overflow-hidden" style={{ background: '#0B0A08' }} ref={ref}>
@@ -117,11 +120,11 @@ export default function WorldMapSection() {
 
       <div className="max-w-7xl mx-auto px-6 md:px-10 mb-12 md:mb-16">
         <RevealLine delay={0}>
-          <p className="text-sm font-mono font-semibold tracking-[0.18em] text-primary uppercase mb-4">Global Reach</p>
+          <p className="text-sm font-mono font-semibold tracking-[0.18em] text-primary uppercase mb-4">{t('world.eyebrow')}</p>
         </RevealLine>
         <RevealLine delay={0.1}>
           <h2 className="text-[clamp(2rem,4vw,3rem)] font-bold tracking-tighter text-primary leading-tight max-w-xl">
-            Starting in India.<br />Built for the world.
+            {t('world.headline1')}<br />{t('world.headline2')}
           </h2>
         </RevealLine>
         <motion.p
@@ -130,9 +133,7 @@ export default function WorldMapSection() {
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.8, delay: 0.3, ease: EASE_OUT }}
         >
-          India is the proof of concept. 600M vernacular speakers, the world's
-          largest mobile-first population. The infrastructure we build here travels
-          to every market where language is still a barrier.
+          {t('world.para')}
         </motion.p>
       </div>
 
@@ -223,13 +224,8 @@ export default function WorldMapSection() {
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.8, delay: 0.8, ease: EASE_OUT }}
         >
-          {[
-            { stat: '14',   label: 'Indian languages in Phase 1' },
-            { stat: '600M', label: 'Vernacular speakers, India' },
-            { stat: '4B',   label: 'Global addressable market' },
-            { stat: '1',    label: 'Platform, built from scratch' },
-          ].map(({ stat, label }) => (
-            <div key={label}>
+          {wstats.map(({ stat, label }, i) => (
+            <div key={i}>
               <p className="font-mono text-2xl font-semibold text-primary mb-1">{stat}</p>
               <p className="text-xs text-muted leading-snug">{label}</p>
             </div>

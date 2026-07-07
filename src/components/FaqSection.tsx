@@ -1,37 +1,11 @@
 import { useState, useRef } from 'react'
 import { motion, AnimatePresence, useInView } from 'framer-motion'
 import RevealLine from './shared/RevealLine'
+import { useLang } from '../i18n/LanguageContext'
 
 const EASE_OUT = [0.23, 1, 0.32, 1] as const
 
-const faqs = [
-  {
-    q: 'What exactly is Vernacular AI?',
-    a: 'Vernacular AI refers to AI tools built natively for non-English languages — not translated versions of English products. Our platform is designed from first principles in Hindi and 13 other Indian languages, using voice-first interfaces, culturally relevant content, and AI pedagogy that fits how vernacular learners actually communicate.',
-  },
-  {
-    q: 'Why does the language gap matter so much?',
-    a: "Current AI tools perform at ~80% accuracy in English but drop below 55% in low-resource languages. That 25-point gap is the difference between a tool that empowers and one that misleads. More importantly, the 30–35% productivity gain AI delivers to junior workers — the people who need it most — is structurally blocked for the 4 billion who don't access AI in their language.",
-  },
-  {
-    q: 'What is the VALI Certification?',
-    a: 'VALI (Vernacular AI Literacy Index) is our proprietary certification framework. It measures an individual\'s ability to effectively use AI tools in their native language across defined competency levels. Certification is the business model — learners pay to get certified, employers pay to hire certified workers, and the whole system creates an incentive structure that doesn\'t exist today.',
-  },
-  {
-    q: 'How do the three layers reinforce each other?',
-    a: 'Layer 1 (AI Literacy) creates the user base and generates real interaction data. Layer 2 (Applied Products) serves those users with monetisable tools. Layer 3 (Data Flywheel) captures 1M+ real vernacular interactions, which continuously improves the literacy layer and pre-validates every product before it ships. Each layer makes the other two stronger.',
-  },
-  {
-    q: 'Why start with QSR for Applied AI Products?',
-    a: "QSR (Quick Service Restaurants) is India's fastest-growing SME segment, deeply mobile-native, and chronically underserved by existing software. Voice ordering eliminates the literacy barrier at the point of sale. Owner dashboards give operators their first real-time business intelligence. It's the perfect product-market fit proof point before we expand to MSME, healthcare, and agriculture.",
-  },
-  {
-    q: 'Who is Cosmoplex building for?',
-    a: "Three groups: (1) Learners — vernacular speakers who want to participate in the AI economy. (2) Employers and platforms — who need a certified, AI-ready workforce at scale. (3) Businesses — particularly SMEs in QSR, agriculture, and healthcare who need AI tools they can actually use. The flywheel serves all three simultaneously.",
-  },
-]
-
-function FaqItem({ item, index, isLast }: { item: typeof faqs[0]; index: number; isLast: boolean }) {
+function FaqItem({ item, index, isLast }: { item: { q: string; a: string }; index: number; isLast: boolean }) {
   const [open, setOpen] = useState(false)
   const ref = useRef<HTMLDivElement>(null)
   const isInView = useInView(ref, { once: true, margin: '-8% 0px' })
@@ -79,6 +53,8 @@ function FaqItem({ item, index, isLast }: { item: typeof faqs[0]; index: number;
 }
 
 export default function FaqSection() {
+  const { t, tv } = useLang()
+  const faqs = tv<{ q: string; a: string }[]>('faq.items')
   return (
     <section className="py-14 md:py-20" style={{ background: '#0B0A08' }}>
       <div className="max-w-7xl mx-auto px-6 md:px-10">
@@ -86,11 +62,11 @@ export default function FaqSection() {
 
           <div className="lg:sticky lg:top-28 lg:self-start">
             <RevealLine delay={0}>
-              <p className="text-sm font-mono font-semibold tracking-[0.18em] text-primary uppercase mb-5">Questions</p>
+              <p className="text-sm font-mono font-semibold tracking-[0.18em] text-primary uppercase mb-5">{t('faq.eyebrow')}</p>
             </RevealLine>
             <RevealLine delay={0.1}>
               <h2 className="text-[clamp(2rem,3.5vw,2.8rem)] font-bold tracking-tighter text-primary leading-[1.05]">
-                Common questions about Cosmoplex
+                {t('faq.headline')}
               </h2>
             </RevealLine>
             <motion.p
@@ -100,7 +76,7 @@ export default function FaqSection() {
               viewport={{ once: true, margin: '-10% 0px' }}
               transition={{ duration: 0.7, delay: 0.25, ease: EASE_OUT }}
             >
-              Everything you need to understand the thesis, the business model, and the technology.
+              {t('faq.sub')}
             </motion.p>
           </div>
 

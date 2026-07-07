@@ -7,22 +7,24 @@ import StackSection from '../components/StackSection'
 import FaqSection from '../components/FaqSection'
 import ClosingSection from '../components/ClosingSection'
 import SectionDivider from '../components/shared/SectionDivider'
+import { useLang } from '../i18n/LanguageContext'
 
 export default function HomePage() {
+  const { t } = useLang()
   return (
     <>
       <Hero />
       <MarqueeStrip />
       {/* dark → dark */}
-      <SectionDivider label="The Context" style={{ background: '#0B0A08' }} />
+      <SectionDivider label={t('thesis.eyebrow')} style={{ background: '#0B0A08' }} />
       <ThesisSection />
-      <SectionDivider label="The Divide" style={{ background: '#0B0A08' }} />
+      <SectionDivider label={t('divide.eyebrow')} style={{ background: '#0B0A08' }} />
       <DivideSection />
-      <SectionDivider label="Global Reach" style={{ background: '#0B0A08' }} />
+      <SectionDivider label={t('world.eyebrow')} style={{ background: '#0B0A08' }} />
       <WorldMapSection />
-      <SectionDivider label="The Stack" style={{ background: '#0B0A08' }} />
+      <SectionDivider label={t('stack.eyebrow')} style={{ background: '#0B0A08' }} />
       <StackSection />
-      <SectionDivider label="Questions" style={{ background: '#0B0A08' }} />
+      <SectionDivider label={t('faq.eyebrow')} style={{ background: '#0B0A08' }} />
       <FaqSection />
       <ClosingSection />
     </>
