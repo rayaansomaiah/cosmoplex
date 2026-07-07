@@ -84,27 +84,45 @@ export default function AppliedAIPage() {
           <div className="p-8 md:p-12"
             style={{ background: 'radial-gradient(ellipse 90% 80% at 15% 0%, rgba(212,168,67,0.08) 0%, transparent 60%)' }}>
 
-            <div className="flex flex-wrap items-center gap-x-4 gap-y-2 mb-6">
-              <span className="text-[11px] font-mono tracking-[0.2em] uppercase text-accent">Featured product</span>
-              <span className="text-[11px] font-mono tracking-[0.14em] uppercase px-2.5 py-1 rounded-full border border-hairline text-faint">Live</span>
+            <div className="grid grid-cols-1 md:grid-cols-[1fr_auto] gap-10 md:gap-12 items-center">
+
+              {/* Left — copy */}
+              <div>
+                <div className="flex flex-wrap items-center gap-x-4 gap-y-2 mb-6">
+                  <span className="text-[11px] font-mono tracking-[0.2em] uppercase text-accent">Featured product</span>
+                  <span className="text-[11px] font-mono tracking-[0.14em] uppercase px-2.5 py-1 rounded-full border border-hairline text-faint">Live</span>
+                </div>
+
+                <h2 className="text-3xl md:text-5xl font-bold text-primary tracking-tighter mb-2">WiseOrder</h2>
+                <p className="text-lg text-accent font-medium mb-6">Voice-first restaurant ordering.</p>
+
+                <p className="text-base text-muted leading-relaxed max-w-[52ch] mb-4">
+                  Scan the QR code on your table and just talk. WiseOrder understands the
+                  order, builds the cart, and reads it back to you in the same language.
+                  No app, no waiting, no scrolling through a long digital menu.
+                </p>
+
+                {/* Spoken-order mock */}
+                <div className="inline-flex items-center gap-3 rounded-2xl border border-hairline px-5 py-3 my-4"
+                  style={{ background: 'rgba(11,10,8,0.6)' }}>
+                  <span className="text-accent text-lg">◉</span>
+                  <span className="text-base text-primary">“ಎರಡು ಮಸಾಲಾ ದೋಸೆ, ಒಂದು ಫಿಲ್ಟರ್ ಕಾಫಿ”</span>
+                </div>
+                <p className="text-xs text-faint font-mono mb-2">— heard, understood, confirmed.</p>
+              </div>
+
+              {/* Right — phone demo */}
+              <div className="justify-self-center md:justify-self-end flex-shrink-0">
+                <video
+                  autoPlay muted loop playsInline preload="auto"
+                  className="block w-[210px] md:w-[240px] rounded-[30px]"
+                  style={{ boxShadow: '0 30px 70px -25px rgba(0,0,0,0.75)' }}
+                >
+                  <source src="/wiseorder.mp4" type="video/mp4" />
+                </video>
+              </div>
+
             </div>
-
-            <h2 className="text-3xl md:text-5xl font-bold text-primary tracking-tighter mb-2">WiseOrder</h2>
-            <p className="text-lg text-accent font-medium mb-6">Voice-first restaurant ordering.</p>
-
-            <p className="text-base text-muted leading-relaxed max-w-[58ch] mb-4">
-              Scan the QR code on your table and just talk. WiseOrder understands the
-              order, builds the cart, and reads it back to you in the same language.
-              No app, no waiting, no scrolling through a long digital menu.
-            </p>
-
-            {/* Spoken-order mock */}
-            <div className="inline-flex items-center gap-3 rounded-2xl border border-hairline px-5 py-3 my-4"
-              style={{ background: 'rgba(11,10,8,0.6)' }}>
-              <span className="text-accent text-lg">◉</span>
-              <span className="text-base text-primary">“ಎರಡು ಮಸಾಲಾ ದೋಸೆ, ಒಂದು ಫಿಲ್ಟರ್ ಕಾಫಿ”</span>
-            </div>
-            <p className="text-xs text-faint font-mono mb-2">— heard, understood, confirmed.</p>
           </div>
 
           {/* Flow */}
