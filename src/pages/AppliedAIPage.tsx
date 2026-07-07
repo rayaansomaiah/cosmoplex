@@ -218,7 +218,15 @@ export default function AppliedAIPage() {
         </div>
       </div>
 
-      {modalOpen && <WaitlistModal onClose={() => setModalOpen(false)} />}
+      {modalOpen && (
+        <WaitlistModal
+          onClose={() => setModalOpen(false)}
+          source="Applied AI"
+          eyebrow="Get in touch"
+          title="Let's talk products."
+          submitLabel="Send"
+        />
+      )}
     </section>
   )
 }

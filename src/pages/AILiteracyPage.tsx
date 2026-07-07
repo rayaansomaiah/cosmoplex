@@ -150,7 +150,15 @@ export default function AILiteracyPage() {
         </div>
       </div>
 
-      {modalOpen && <WaitlistModal onClose={() => setModalOpen(false)} />}
+      {modalOpen && (
+        <WaitlistModal
+          onClose={() => setModalOpen(false)}
+          source="AI Literacy"
+          eyebrow="AI 101 Waitlist"
+          title="Be first to learn."
+          submitLabel="Join the waitlist"
+        />
+      )}
     </section>
   )
 }

@@ -2,11 +2,27 @@ import { useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 
 const EASE_OUT = [0.23, 1, 0.32, 1] as const
-const FORMSPREE_ENDPOINT = 'https://formspree.io/f/xwvyjdey'
+const DEFAULT_ENDPOINT = 'https://formspree.io/f/xwvyjdey'
 
-interface Props { onClose: () => void }
+interface Props {
+  onClose: () => void
+  /** Formspree endpoint — override to route this form to its own inbox */
+  endpoint?: string
+  /** Label that identifies where the submission came from (tags every response) */
+  source?: string
+  eyebrow?: string
+  title?: string
+  submitLabel?: string
+}
 
-export default function WaitlistModal({ onClose }: Props) {
+export default function WaitlistModal({
+  onClose,
+  endpoint = DEFAULT_ENDPOINT,
+  source = 'Homepage',
+  eyebrow = 'Join the Waitlist',
+  title = 'Be first when we launch.',
+  submitLabel = 'Join the waitlist',
+}: Props) {
   const [form, setForm] = useState({ name: '', email: '', phone: '', comments: '' })
   const [status, setStatus] = useState<'idle' | 'sending' | 'success' | 'error'>('idle')
 
@@ -17,10 +33,10 @@ export default function WaitlistModal({ onClose }: Props) {
     e.preventDefault()
     setStatus('sending')
     try {
-      const res = await fetch(FORMSPREE_ENDPOINT, {
+      const res = await fetch(endpoint, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
-        body: JSON.stringify(form),
+        body: JSON.stringify({ ...form, source, _subject: `Cosmoplex — ${source} enquiry` }),
       })
       setStatus(res.ok ? 'success' : 'error')
     } catch {
@@ -71,9 +87,9 @@ export default function WaitlistModal({ onClose }: Props) {
             </div>
           ) : (
             <>
-              <p className="text-xs font-mono tracking-[0.18em] uppercase text-accent mb-2">Join the Waitlist</p>
+              <p className="text-xs font-mono tracking-[0.18em] uppercase text-accent mb-2">{eyebrow}</p>
               <h2 className="text-xl font-bold text-primary mb-6 leading-snug">
-                Be first when we launch.
+                {title}
               </h2>
 
               <form onSubmit={submit} className="space-y-4">
@@ -94,7 +110,7 @@ export default function WaitlistModal({ onClose }: Props) {
                 <button type="submit" disabled={status === 'sending'}
                   className="w-full bg-accent text-bg font-semibold py-3.5 rounded-full text-sm
                     hover:bg-primary transition-colors duration-200 disabled:opacity-50">
-                  {status === 'sending' ? 'Sending…' : 'Join the waitlist'}
+                  {status === 'sending' ? 'Sending…' : submitLabel}
                 </button>
               </form>
             </>
