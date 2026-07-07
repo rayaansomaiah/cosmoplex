@@ -1,36 +1,45 @@
+import { useEffect } from 'react'
+import { BrowserRouter, Routes, Route, useLocation } from 'react-router-dom'
 import Nav from './components/Nav'
-import Hero from './components/Hero'
-import MarqueeStrip from './components/MarqueeStrip'
-import ThesisSection from './components/ThesisSection'
-import DivideSection from './components/DivideSection'
-import WorldMapSection from './components/WorldMapSection'
-import StackSection from './components/StackSection'
-import FaqSection from './components/FaqSection'
-import ClosingSection from './components/ClosingSection'
-import SectionDivider from './components/shared/SectionDivider'
+import HomePage from './pages/HomePage'
+import AILiteracyPage from './pages/AILiteracyPage'
+import AppliedAIPage from './pages/AppliedAIPage'
+
+// Scroll to top on navigation; smooth-scroll to a hash target if present
+function ScrollManager() {
+  const { pathname, hash } = useLocation()
+  useEffect(() => {
+    if (hash) {
+      const id = hash.slice(1)
+      // wait a frame for the target section to mount
+      requestAnimationFrame(() => {
+        const el = document.getElementById(id)
+        if (el) el.scrollIntoView({ behavior: 'smooth' })
+        else window.scrollTo(0, 0)
+      })
+      return
+    }
+    window.scrollTo(0, 0)
+  }, [pathname, hash])
+  return null
+}
 
 export default function App() {
   return (
-    <div className="bg-bg text-primary font-sans">
-      <div className="grain-overlay" aria-hidden="true" />
-      <Nav />
-      <Hero />
-      <MarqueeStrip />
-      {/* dark → dark */}
-      <SectionDivider label="The Context" style={{ background: '#0B0A08' }} />
-      <ThesisSection />
-      <SectionDivider label="The Divide" style={{ background: '#0B0A08' }} />
-      <DivideSection />
-      <SectionDivider label="Global Reach" style={{ background: '#0B0A08' }} />
-      <WorldMapSection />
-      <SectionDivider label="The Stack" style={{ background: '#0B0A08' }} />
-      <StackSection />
-      <SectionDivider label="Questions" style={{ background: '#0B0A08' }} />
-      <FaqSection />
-      <ClosingSection />
-      <footer className="border-t border-hairline py-6 text-center">
-        <p className="text-xs text-faint font-mono">© 2026 Cosmoplex AI, Inc. All rights reserved.</p>
-      </footer>
-    </div>
+    <BrowserRouter>
+      <div className="bg-bg text-primary font-sans">
+        <div className="grain-overlay" aria-hidden="true" />
+        <Nav />
+        <ScrollManager />
+        <Routes>
+          <Route path="/" element={<HomePage />} />
+          <Route path="/ai-literacy" element={<AILiteracyPage />} />
+          <Route path="/applied-ai" element={<AppliedAIPage />} />
+        </Routes>
+        <footer className="border-t border-hairline py-6 text-center">
+          <p className="text-xs text-faint font-mono">© 2026 Cosmoplex AI, Inc. All rights reserved.</p>
+        </footer>
+      </div>
+    </BrowserRouter>
   )
 }

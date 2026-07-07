@@ -1,5 +1,6 @@
 import { useRef } from 'react'
 import { motion, useInView } from 'framer-motion'
+import { Link } from 'react-router-dom'
 import RevealLine from './shared/RevealLine'
 
 const EASE_OUT = [0.23, 1, 0.32, 1] as const
@@ -13,6 +14,7 @@ const layers = [
       'Voice-first, WhatsApp-delivered AI learning built for how India actually communicates. Multi-agent pedagogy that adapts to the learner — not the other way around.',
     tags: ['Voice-first', 'WhatsApp-delivered', 'Multi-agent', 'VALI Certification', 'Hindi + 14 Languages'],
     output: 'Millions of AI-literate vernacular speakers.',
+    href: '/ai-literacy',
   },
   {
     number: '02',
@@ -22,6 +24,7 @@ const layers = [
       'AI-native tools built directly for real daily workflows. QSR voice ordering and owner dashboards are the entry point. MSME, healthcare, and agriculture follow.',
     tags: ['QSR Voice Ordering', 'Owner Dashboard', 'MSME Tools', 'Healthcare AI', 'Agriculture'],
     output: 'Revenue-generating AI tools that serve vernacular India.',
+    href: '/applied-ai',
   },
   {
     number: '03',
@@ -31,6 +34,7 @@ const layers = [
       '1M+ vernacular interactions become the product roadmap. Every lesson, query, and friction point tells us what the next 4 billion workers actually need — before we build it.',
     tags: ['1M+ Interactions', 'Proprietary Dataset', 'Pre-validated Roadmap', 'Network Effects'],
     output: 'Compounding distribution and data advantage.',
+    href: undefined,
   },
 ]
 
@@ -110,6 +114,17 @@ function LayerCard({ layer, isLast }: { layer: (typeof layers)[0]; isLast: boole
           <div className="w-4 h-px bg-accent opacity-60" />
           <p className="text-sm text-muted">{layer.output}</p>
         </div>
+
+        {layer.href && (
+          <Link
+            to={layer.href}
+            className="group mt-7 inline-flex items-center gap-2 text-sm font-semibold px-5 py-2.5 rounded-full
+                       border border-accent text-accent hover:bg-accent hover:text-bg transition-colors duration-[250ms]"
+          >
+            Learn more
+            <span className="inline-block transition-transform duration-200 ease-out group-hover:translate-x-1">→</span>
+          </Link>
+        )}
       </LayerCardInner>
     </motion.div>
   )

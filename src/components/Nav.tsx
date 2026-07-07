@@ -1,11 +1,12 @@
 import { useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
+import { Link } from 'react-router-dom'
 import logo from '../../cosmoplex_logo_plexus.png'
 
 const links = [
-  { label: 'Thesis', href: '#thesis' },
-  { label: 'The Stack', href: '#the-stack' },
-  { label: 'The Divide', href: '#the-divide' },
+  { label: 'Thesis', to: '/#thesis' },
+  { label: 'AI Literacy', to: '/ai-literacy' },
+  { label: 'Applied AI', to: '/applied-ai' },
 ]
 
 export default function Nav() {
@@ -21,31 +22,30 @@ export default function Nav() {
           animate={{ y: 0, opacity: 1, scale: 1 }}
           transition={{ duration: 0.7, delay: 0.3, ease: [0.23, 1, 0.32, 1] }}
         >
-          <a href="#" className="flex items-center shrink-0">
+          <Link to="/" className="flex items-center shrink-0">
             <div style={{ width: 90, height: 32, overflow: 'hidden' }}>
               <img src={logo} alt="Cosmoplex" style={{ width: 90, height: 90, marginTop: -29, display: 'block' }} />
             </div>
-          </a>
+          </Link>
 
           <div className="hidden md:flex items-center gap-6">
-            {links.map(({ label, href }) => (
-              <a
+            {links.map(({ label, to }) => (
+              <Link
                 key={label}
-                href={href}
+                to={to}
                 className="text-[13px] text-muted hover:text-primary transition-colors duration-200 whitespace-nowrap font-medium"
               >
                 {label}
-              </a>
+              </Link>
             ))}
           </div>
 
-          <motion.a
-            href="#contact"
+          <Link
+            to="/#contact"
             className="hidden md:inline-flex text-[12px] font-semibold px-4 py-2 rounded-full bg-accent text-bg hover:bg-primary transition-colors duration-200 whitespace-nowrap"
-            whileTap={{ scale: 0.96 }}
           >
             Get in touch
-          </motion.a>
+          </Link>
 
           <button
             className="md:hidden w-8 h-8 flex items-center justify-center text-muted hover:text-primary transition-colors"
@@ -67,18 +67,21 @@ export default function Nav() {
             exit={{ opacity: 0 }}
             transition={{ duration: 0.25 }}
           >
-            {[...links, { label: 'Contact', href: '#contact' }].map(({ label, href }, i) => (
-              <motion.a
+            {[...links, { label: 'Contact', to: '/#contact' }].map(({ label, to }, i) => (
+              <motion.div
                 key={label}
-                href={href}
-                className="text-4xl font-bold text-primary hover:text-accent transition-colors"
                 initial={{ opacity: 0, y: 24 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: i * 0.07, ease: [0.23, 1, 0.32, 1] }}
-                onClick={() => setOpen(false)}
               >
-                {label}
-              </motion.a>
+                <Link
+                  to={to}
+                  className="text-4xl font-bold text-primary hover:text-accent transition-colors"
+                  onClick={() => setOpen(false)}
+                >
+                  {label}
+                </Link>
+              </motion.div>
             ))}
           </motion.div>
         )}
