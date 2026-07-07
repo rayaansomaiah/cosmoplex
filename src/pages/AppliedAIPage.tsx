@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useRef, useState } from 'react'
 import { motion } from 'framer-motion'
 import { Link } from 'react-router-dom'
 import StarField from '../components/shared/StarField'
@@ -30,6 +30,16 @@ const beyond = [
 
 export default function AppliedAIPage() {
   const [modalOpen, setModalOpen] = useState(false)
+  const videoRef = useRef<HTMLVideoElement>(null)
+  const [muted, setMuted] = useState(true)
+
+  const toggleSound = () => {
+    const v = videoRef.current
+    if (!v) return
+    v.muted = !v.muted
+    setMuted(v.muted)
+    if (!v.muted) v.play().catch(() => {})
+  }
 
   return (
     <section className="relative overflow-hidden" style={{ background: '#0B0A08' }}>
@@ -113,13 +123,30 @@ export default function AppliedAIPage() {
 
               {/* Right — phone demo */}
               <div className="justify-self-center md:justify-self-end flex-shrink-0">
-                <video
-                  autoPlay muted loop playsInline preload="auto"
-                  className="block w-[210px] md:w-[240px] rounded-[30px]"
-                  style={{ boxShadow: '0 30px 70px -25px rgba(0,0,0,0.75)' }}
-                >
-                  <source src="/wiseorder.mp4" type="video/mp4" />
-                </video>
+                <div className="relative w-[210px] md:w-[240px]">
+                  <video
+                    ref={videoRef}
+                    autoPlay muted loop playsInline preload="auto"
+                    onClick={toggleSound}
+                    className="block w-full rounded-[30px] cursor-pointer"
+                    style={{ boxShadow: '0 30px 70px -25px rgba(0,0,0,0.75)' }}
+                  >
+                    <source src="/wiseorder.mp4" type="video/mp4" />
+                  </video>
+
+                  {/* Sound toggle */}
+                  <button
+                    onClick={toggleSound}
+                    aria-label={muted ? 'Unmute video' : 'Mute video'}
+                    className="absolute bottom-4 left-1/2 -translate-x-1/2 inline-flex items-center gap-2
+                               rounded-full px-3.5 py-1.5 text-xs font-medium text-primary
+                               border border-hairline transition-colors duration-200 hover:border-accent"
+                    style={{ background: 'rgba(11,10,8,0.72)', backdropFilter: 'blur(8px)' }}
+                  >
+                    <span>{muted ? '🔇' : '🔊'}</span>
+                    {muted && <span>Tap for sound</span>}
+                  </button>
+                </div>
               </div>
 
             </div>
