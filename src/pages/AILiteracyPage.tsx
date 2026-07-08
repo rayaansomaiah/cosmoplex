@@ -8,7 +8,7 @@ import { useLang } from '../i18n/LanguageContext'
 
 const EASE_OUT = [0.23, 1, 0.32, 1] as const
 
-const LANGS = ['हिंदी', 'বাংলা', 'தமிழ்', 'తెలుగు', 'मराठी', 'ಕನ್ನಡ', 'മലയാളം', 'ਪੰਜਾਬੀ', 'ગુજરાતી', '+ more']
+const LANGS = ['English', 'हिन्दी', 'मराठी', 'తెలుగు', 'தமிழ்', 'ಕನ್ನಡ']
 
 export default function AILiteracyPage() {
   const [modalOpen, setModalOpen] = useState(false)
