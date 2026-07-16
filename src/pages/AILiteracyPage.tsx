@@ -15,6 +15,7 @@ export default function AILiteracyPage() {
   const { t, tv } = useLang()
   const curriculum = tv<{ t: string; d: string }[]>('aiLit.curriculum')
   const delivery = tv<{ t: string; d: string }[]>('aiLit.delivery')
+  const levels = tv<{ name: string; audience: string; desc: string }[]>('aiLit.levels')
 
   return (
     <section className="relative overflow-hidden" style={{ background: '#0B0A08' }}>
@@ -54,6 +55,49 @@ export default function AILiteracyPage() {
         >
           {t('aiLit.para')}
         </motion.p>
+
+        {/* Levels */}
+        <div className="mb-20">
+          <p className="text-sm font-mono tracking-[0.16em] text-faint uppercase mb-8">{t('aiLit.levelsLabel')}</p>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            {levels.map((lv, i) => {
+              const soon = i === 1
+              return (
+                <motion.div
+                  key={i}
+                  className="rounded-2xl border p-7 md:p-8"
+                  style={{
+                    background: soon ? '#0B0A08' : '#141310',
+                    borderColor: soon ? '#2E2B28' : 'rgba(212,168,67,0.32)',
+                    borderStyle: soon ? 'dashed' : 'solid',
+                  }}
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true, margin: '-10% 0px' }}
+                  transition={{ duration: 0.6, delay: i * 0.1, ease: EASE_OUT }}
+                >
+                  <div className="flex items-center justify-between mb-5">
+                    <span className="text-xs font-mono tracking-[0.16em] text-accent uppercase">
+                      {t('aiLit.levelLabel')} {String(i + 1).padStart(2, '0')}
+                    </span>
+                    <span
+                      className="text-[10px] font-mono tracking-[0.14em] uppercase px-2.5 py-1 rounded-full border"
+                      style={{
+                        borderColor: soon ? '#2E2B28' : 'rgba(212,168,67,0.4)',
+                        color: soon ? '#C8C2BA' : '#D4A843',
+                      }}
+                    >
+                      {soon ? t('aiLit.comingSoonBadge') : t('aiLit.availableBadge')}
+                    </span>
+                  </div>
+                  <h3 className="text-xl md:text-2xl font-bold text-primary tracking-tight mb-1">{lv.name}</h3>
+                  <p className="text-sm text-accent font-medium mb-4">{lv.audience}</p>
+                  <p className="text-sm text-muted leading-relaxed">{lv.desc}</p>
+                </motion.div>
+              )
+            })}
+          </div>
+        </div>
 
         {/* Curriculum */}
         <div className="mb-20">

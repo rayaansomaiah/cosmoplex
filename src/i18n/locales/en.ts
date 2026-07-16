@@ -149,7 +149,15 @@ const en = {
     h1a: 'Learn AI at work,',
     h1b: 'in your own language.',
     para: "Cosmoplex AI School teaches students, freshers, and early-career professionals what AI is — and how to actually use it at work. Entirely in your own language, with no coding or tech background required.",
-    curriculumLabel: "What you'll learn",
+    levelsLabel: 'The levels',
+    levelLabel: 'Level',
+    availableBadge: 'Available now',
+    comingSoonBadge: 'Coming soon',
+    levels: [
+      { name: 'AI 101', audience: 'Students, freshers & first-time users', desc: 'Start from zero. What AI is, and how to use it with confidence in everyday work and life — built for jobseekers, and just as welcoming to homemakers, shopkeepers, and anyone new to it.' },
+      { name: 'AI for Professionals', audience: 'Experienced managers & domain experts', desc: "You know your business inside out — now get fluent with the AI tools a new generation is already using. Awareness and hands-on confidence for working professionals, minus the jargon." },
+    ],
+    curriculumLabel: 'Inside AI 101',
     curriculum: [
       { t: 'What AI actually is', d: 'Plain-language foundations — no jargon, no maths. What these tools are, what they can do, and where they fall short.' },
       { t: 'How to use it at work', d: 'Put AI to work on real tasks — writing, research, planning, and the everyday work that fills your day.' },
