@@ -96,7 +96,7 @@ export default function AILiteracyPage() {
 
                   {!soon && (
                     <a
-                      href="https://wa.me/917204419938?text=Hi"
+                      href="https://wa.me/917204419938?text=Hi%20I%20am%20interested%20and%20would%20like%20to%20start%20my%20AI%20learning%20journey"
                       target="_blank"
                       rel="noopener noreferrer"
                       className="group mt-6 inline-flex items-center gap-2 text-sm font-semibold px-5 py-2.5 rounded-full
