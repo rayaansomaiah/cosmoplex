@@ -93,6 +93,19 @@ export default function AILiteracyPage() {
                   <h3 className="text-xl md:text-2xl font-bold text-primary tracking-tight mb-1">{lv.name}</h3>
                   <p className="text-sm text-accent font-medium mb-4">{lv.audience}</p>
                   <p className="text-sm text-muted leading-relaxed">{lv.desc}</p>
+
+                  {!soon && (
+                    <a
+                      href="https://wa.me/917204419938?text=Hi"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="group mt-6 inline-flex items-center gap-2 text-sm font-semibold px-5 py-2.5 rounded-full
+                                 bg-accent text-bg hover:bg-primary transition-colors duration-[250ms]"
+                    >
+                      {t('aiLit.startCourse')}
+                      <span className="inline-block transition-transform duration-200 ease-out group-hover:translate-x-1">→</span>
+                    </a>
+                  )}
                 </motion.div>
               )
             })}
