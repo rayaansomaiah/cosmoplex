@@ -1,6 +1,7 @@
 import { useEffect } from 'react'
 import { BrowserRouter, Routes, Route, useLocation } from 'react-router-dom'
 import Nav from './components/Nav'
+import Footer from './components/shared/Footer'
 import HomePage from './pages/HomePage'
 import AILiteracyPage from './pages/AILiteracyPage'
 import AppliedAIPage from './pages/AppliedAIPage'
@@ -36,9 +37,7 @@ export default function App() {
           <Route path="/ai-literacy" element={<AILiteracyPage />} />
           <Route path="/applied-ai" element={<AppliedAIPage />} />
         </Routes>
-        <footer className="border-t border-hairline py-6 text-center">
-          <p className="text-xs text-faint font-mono">© 2026 Cosmoplex AI, Inc. All rights reserved.</p>
-        </footer>
+        <Footer />
       </div>
     </BrowserRouter>
   )

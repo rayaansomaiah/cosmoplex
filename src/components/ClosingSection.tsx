@@ -134,16 +134,6 @@ export default function ClosingSection() {
           {modalOpen && <WaitlistModal onClose={() => setModalOpen(false)} />}
         </div>
       </div>
-
-      {/* Footer */}
-      <div className="border-t border-hairline py-10">
-        <div className="max-w-7xl mx-auto px-6 md:px-10 flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
-          <div className="flex items-center gap-8">
-            <span className="text-xs font-mono text-muted tracking-widest uppercase">Cosmoplex</span>
-            <span className="text-xs text-muted">{t('closing.footerTagline')}</span>
-          </div>
-        </div>
-      </div>
     </section>
   )
 }
