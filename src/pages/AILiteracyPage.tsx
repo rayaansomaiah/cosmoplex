@@ -99,6 +99,22 @@ export default function AILiteracyPage() {
           </div>
         </div>
 
+        {/* Intro video */}
+        <div className="mb-20">
+          <p className="text-sm font-mono tracking-[0.16em] text-faint uppercase mb-8">{t('aiLit.introLabel')}</p>
+          <div className="flex justify-center">
+            <video
+              controls
+              playsInline
+              preload="metadata"
+              className="block w-full max-w-[340px] rounded-[28px] border border-hairline"
+              style={{ background: '#000', boxShadow: '0 30px 70px -25px rgba(0,0,0,0.75)' }}
+            >
+              <source src="/ai101-intro.mp4" type="video/mp4" />
+            </video>
+          </div>
+        </div>
+
         {/* Curriculum */}
         <div className="mb-20">
           <p className="text-sm font-mono tracking-[0.16em] text-faint uppercase mb-8">{t('aiLit.curriculumLabel')}</p>

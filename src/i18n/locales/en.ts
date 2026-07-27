@@ -157,6 +157,7 @@ const en = {
       { name: 'AI 101', audience: 'Students, freshers & first-time users', desc: 'Start from zero. What AI is, and how to use it with confidence in everyday work and life — built for jobseekers, and just as welcoming to homemakers, shopkeepers, and anyone new to it.' },
       { name: 'AI for Professionals', audience: 'Experienced managers & domain experts', desc: "You know your business inside out — now get fluent with the AI tools a new generation is already using. Awareness and hands-on confidence for working professionals, minus the jargon." },
     ],
+    introLabel: 'Watch the intro',
     curriculumLabel: 'Inside AI 101',
     curriculum: [
       { t: 'What AI actually is', d: 'Plain-language foundations — no jargon, no maths. What these tools are, what they can do, and where they fall short.' },
